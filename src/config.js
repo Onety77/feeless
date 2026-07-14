@@ -9,4 +9,4 @@ export const LINKS = {
 };
 
 // The token's contract address. Shown + copyable across the site.
-export const CA = "0xf3db904cefc1ebe0da53c0b9374346c47949fb2a";
+export const CA = "coming soon";
