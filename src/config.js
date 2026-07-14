@@ -4,7 +4,7 @@
 // ------------------------------------------------------------------
 
 export const LINKS = {
-  x: "#", // TODO: real X / community link
+  x: "https://x.com/feeless26?s=21", // TODO: real X / community link
   chart: "#", // TODO: real DexScreener chart link
 };
 
