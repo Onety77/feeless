@@ -6,35 +6,49 @@ import Marquee from "../components/Marquee.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { Sticker, Stamp } from "../components/Sticker.jsx";
 import { LINKS } from "../config.js";
+import { useParallax } from "../hooks.js";
+
+function handleHeroMove(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+  e.currentTarget.style.setProperty("--my", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+}
 
 export default function Home() {
+  const parallax = useParallax(0.12, 50);
+
   return (
     <>
-      <header className="hero">
-        <Sticker rotate={-6} className="hero__badge">
-          <span className="live-dot live-dot--on" /> EST. 2013 · STILL $0 PER TRADE
-        </Sticker>
+      <header className="hero" onMouseMove={handleHeroMove}>
+        <div className="hero__bg" style={{ transform: `translateY(${parallax}px)` }} />
+        <div className="hero__glow" />
 
-        <h1 className="hero__title">
-          Fee<span className="hero__title-lime">less</span>
-          <Mark size={44} className="hero__title-mark" />
-        </h1>
+        <div className="hero__inner">
+          <Sticker rotate={-6} className="hero__badge">
+            <span className="live-dot live-dot--on" /> EST. 2013 · STILL $0 PER TRADE
+          </Sticker>
 
-        <p className="hero__sub">
-          The movement that started when Robinhood killed commissions in 2013 —
-          and never let the industry charge you for trading again.
-        </p>
+          <h1 className="hero__title">
+            Fee<span className="hero__title-lime">less</span>
+            <Mark size={44} className="hero__title-mark" />
+          </h1>
 
-        <div className="hero__actions">
-          <a className="btn btn--primary" href={LINKS.chart} target="_blank" rel="noreferrer">
-            View Chart
-          </a>
-          <a className="btn btn--secondary" href={LINKS.x} target="_blank" rel="noreferrer">
-            Join the Community ↗
-          </a>
+          <p className="hero__sub">
+            The movement that started when Robinhood killed commissions in 2013 —
+            and never let the industry charge you for trading again.
+          </p>
+
+          <div className="hero__actions">
+            <a className="btn btn--primary" href={LINKS.chart} target="_blank" rel="noreferrer">
+              View Chart
+            </a>
+            <a className="btn btn--secondary" href={LINKS.x} target="_blank" rel="noreferrer">
+              Join the Community ↗
+            </a>
+          </div>
+
+          <CopyCA className="hero__ca" />
         </div>
-
-        <CopyCA className="hero__ca" />
       </header>
 
       <section className="banner">

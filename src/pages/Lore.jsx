@@ -3,6 +3,7 @@ import Reveal from "../components/Reveal.jsx";
 import { Sticker, Stamp } from "../components/Sticker.jsx";
 import CopyCA from "../components/CopyCA.jsx";
 import { LINKS } from "../config.js";
+import { useReveal, useCountUp } from "../hooks.js";
 
 const TIMELINE = [
   {
@@ -59,6 +60,9 @@ const TIMELINE = [
 ];
 
 export default function Lore() {
+  const [statsRef, statsVisible] = useReveal();
+  const fundedAccounts = useCountUp(27, { duration: 1400, start: statsVisible });
+
   return (
     <>
       <header className="page-header">
@@ -123,13 +127,17 @@ export default function Lore() {
           </p>
         </Reveal>
 
-        <Reveal delay={100} className="stat-grid">
+        <div
+          ref={statsRef}
+          className={`reveal stat-grid ${statsVisible ? "reveal--visible" : ""}`}
+          style={{ transitionDelay: "100ms" }}
+        >
           <div className="stat-card" style={{ "--rot": "-2deg" }}>
             <div className="stat-num">$0</div>
             <div className="stat-label">Commission per trade, since 2015</div>
           </div>
           <div className="stat-card" style={{ "--rot": "1.5deg" }}>
-            <div className="stat-num">27M+</div>
+            <div className="stat-num">{fundedAccounts}M+</div>
             <div className="stat-label">Funded accounts on Robinhood alone</div>
           </div>
           <div className="stat-card" style={{ "--rot": "-1deg" }}>
@@ -140,7 +148,7 @@ export default function Lore() {
             <div className="stat-num">2013</div>
             <div className="stat-label">Where this whole story begins</div>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       <section className="section section--legacy">
