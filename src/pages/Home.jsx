@@ -37,6 +37,15 @@ export default function Home() {
         <CopyCA className="hero__ca" />
       </header>
 
+      <section className="banner">
+        <img
+          src="/banner.jpg"
+          alt="Feeless — zero fees, built for the people"
+          className="banner__img"
+          loading="lazy"
+        />
+      </section>
+
       <Marquee />
 
       <section className="section">
